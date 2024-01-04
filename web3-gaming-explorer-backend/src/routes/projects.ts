@@ -12,32 +12,36 @@ import {
 const router = express.Router();
 
 router.get("/projects", (req, res) => {
-  getGamingProjects().then(
-    (data: any) => {
-      const projects: Project[] = [];
-      data.coins.map((coin: any) => {
-        projects.push(convertToProject(coin));
-      });
-      res.status(200).json(projects);
-    },
-    (rejected) => {
-      res.status(500).json(rejected);
-    }
-  );
-});
+  const id = <string>req.query.id;
 
-router.get("/projects/:id", (req, res) => {
-  getProjectDetails(req.params.id).then(
-    (data: any) => {
-      const project: ProjectDetails = convertToProjectDetails(
-        data[req.params.id]
-      );
-      res.status(200).json(project);
-    },
-    (rejected) => {
-      res.status(500).json(rejected);
-    }
-  );
+  if (id) {
+    getProjectDetails(id).then(
+      (data: any) => {
+        const projects: ProjectDetails[] = [];
+        const idList = id.split(",");
+        idList.map((i: string) => {
+          projects.push(convertToProjectDetails(data[i]));
+        });
+        res.status(200).json(projects);
+      },
+      (rejected) => {
+        res.status(500).json(rejected);
+      }
+    );
+  } else {
+    getGamingProjects().then(
+      (data: any) => {
+        const projects: Project[] = [];
+        data.coins.map((coin: any) => {
+          projects.push(convertToProject(coin));
+        });
+        res.status(200).json(projects);
+      },
+      (rejected) => {
+        res.status(500).json(rejected);
+      }
+    );
+  }
 });
 
 export default router;
