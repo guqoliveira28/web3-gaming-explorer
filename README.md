@@ -10,10 +10,16 @@ Clone the repository:
 
 Install dependencies:
 
-> cd web3-gaming-projects-explorer
+> cd web3-gaming-projects-explorer/web3-gaming-explorer-backend
+> npm install
+> npm run build
+
+Open other terminal:
+
+> cd web3-gaming-projects-explorer/web3-gaming-explorer-ui
 > npm install
 
-Run the development server:
+Run the development server on both terminals:
 
 > npm start
 
