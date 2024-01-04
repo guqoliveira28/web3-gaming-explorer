@@ -48,7 +48,6 @@ function getProjectDetails<T>(projectId: string) {
   const queryParams = new URLSearchParams({ id: projectId });
 
   let response: Awaited<T> | null = null;
-  console.log(CMC_URL + endpoint + queryParams);
 
   return new Promise(async (resolve, reject) => {
     try {
