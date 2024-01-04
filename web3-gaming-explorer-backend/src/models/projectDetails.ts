@@ -17,9 +17,9 @@ export type ProjectDetails = {
     announcement: string[];
   };
   platform: {
-    name: string;
-    symbol: string;
-    tokenAddress: string;
+    name: string | null;
+    symbol: string | null;
+    tokenAddress: string | null;
   };
   dateLaunched: string;
   selfReportedCirculatingSupply: number;
