@@ -43,9 +43,9 @@ function getGamingProjects<T>(limit: number = 5) {
   });
 }
 
-function getProjectDetails<T>(projectId: string) {
+function getProjectDetails<T>(projectIds: string) {
   const endpoint: string = "/v2/cryptocurrency/info?";
-  const queryParams = new URLSearchParams({ id: projectId });
+  const queryParams = new URLSearchParams({ id: projectIds });
 
   let response: Awaited<T> | null = null;
 
@@ -76,4 +76,37 @@ function getProjectDetails<T>(projectId: string) {
   });
 }
 
-export { getGamingProjects, getProjectDetails };
+function getProjectQuotes<T>(projectIds: string) {
+  const endpoint: string = "/v2/cryptocurrency/quotes/latest?";
+  const queryParams = new URLSearchParams({ id: projectIds });
+
+  let response: Awaited<T> | null = null;
+
+  return new Promise(async (resolve, reject) => {
+    try {
+      response = await fetch(CMC_URL + endpoint + queryParams, {
+        method: "GET",
+        headers: requestHeaders,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json() as Promise<{ data: T }>;
+        })
+        .then((data) => {
+          return data.data;
+        });
+    } catch (ex) {
+      // error
+      console.log(ex);
+      reject(ex);
+    }
+    if (response) {
+      // success
+      resolve(response);
+    }
+  });
+}
+
+export { getGamingProjects, getProjectDetails, getProjectQuotes };
