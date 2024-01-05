@@ -1,3 +1,5 @@
+const localStorageFavorites: string = "favorites";
+
 function formatPrice(price: number): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -5,4 +7,4 @@ function formatPrice(price: number): string {
   }).format(price);
 }
 
-export { formatPrice };
+export { localStorageFavorites, formatPrice };

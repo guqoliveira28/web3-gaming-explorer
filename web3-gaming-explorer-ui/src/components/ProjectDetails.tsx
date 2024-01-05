@@ -1,11 +1,20 @@
-import { ReactElement } from "react";
-import { formatPrice } from "../shared/shared";
+import { ReactElement, useEffect, useState } from "react";
+import { formatPrice, localStorageFavorites } from "../shared/shared";
 
 const chosenLinks = Object.freeze({
   Website: "website",
   Twitter: "twitter",
   Reddit: "reddit",
 });
+
+function getFavoritesFromStorage(): number[] {
+  const saved = localStorage.getItem(localStorageFavorites);
+  if (!saved) {
+    return [];
+  }
+  const initialFavorites = JSON.parse(saved);
+  return initialFavorites || [];
+}
 
 export default function ProjectDetails({
   project,
@@ -14,6 +23,13 @@ export default function ProjectDetails({
   project: Project;
   goBack: Function;
 }) {
+  const [favorites, setFavorites] = useState(() => {
+    return getFavoritesFromStorage();
+  });
+
+  const isFavorite: boolean = favorites.find((id) => id === project.id)
+    ? true
+    : false;
   const urls: ProjectUrls | undefined = project.details?.urls;
   let links: Array<ReactElement> = [];
 
@@ -23,13 +39,29 @@ export default function ProjectDetails({
       const urlArray = urls[projectUrlsKey as keyof ProjectUrls];
       if (urlArray[0] !== "") {
         links.push(
-          <a href={urlArray[0]} target="_blank">
+          <a key={key} href={urlArray[0]} target="_blank">
             {key}
           </a>
         );
       }
     }
   });
+
+  useEffect(() => {
+    localStorage.setItem(localStorageFavorites, JSON.stringify(favorites));
+  }, [favorites]);
+
+  function handleSelectFavorite(projectId: number) {
+    setFavorites((prevFavorites) => {
+      let favs: number[] = [];
+      if (prevFavorites.find((id) => id === projectId)) {
+        favs = prevFavorites.filter((i) => i !== projectId);
+      } else {
+        favs = [...prevFavorites, projectId];
+      }
+      return [...favs];
+    });
+  }
 
   return (
     <div className="project-details">
@@ -38,8 +70,8 @@ export default function ProjectDetails({
           Back
         </div>
         <div className="tags">
-          {project.details?.tagNames.map((tag) => (
-            <span>{tag}</span>
+          {project.details?.tagNames.map((tag, index) => (
+            <span key={index}>{tag}</span>
           ))}
         </div>
         <div className="title">
@@ -47,6 +79,12 @@ export default function ProjectDetails({
           <div>
             <h2>{project.name}</h2>
             <h1>{formatPrice(project.quote.USD.price)}</h1>
+          </div>
+          <div className="favorite">
+            <i
+              className={"fa-regular fa-star" + (isFavorite ? " active" : "")}
+              onClick={() => handleSelectFavorite(project.id)}
+            ></i>
           </div>
         </div>
       </header>
