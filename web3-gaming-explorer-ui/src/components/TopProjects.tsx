@@ -1,11 +1,12 @@
-function formatPrice(price: number): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-  }).format(price);
-}
+import { formatPrice } from "../shared/shared";
 
-export default function TopProjects({ projects }: { projects: Project[] }) {
+export default function TopProjects({
+  projects,
+  selectProject,
+}: {
+  projects: Project[];
+  selectProject: Function;
+}) {
   return (
     <div className="top-projects">
       <h1>Top Web3 Gaming Projects!</h1>
@@ -19,7 +20,7 @@ export default function TopProjects({ projects }: { projects: Project[] }) {
         </thead>
         <tbody>
           {projects.map((project: Project) => (
-            <tr key={project.id}>
+            <tr key={project.id} onClick={() => selectProject(project)}>
               <td id="rank">{project.cmcRank}</td>
               <td id="name">
                 <img src={project.details?.logo} alt={project.name + " logo"} />

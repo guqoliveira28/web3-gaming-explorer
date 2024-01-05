@@ -29,17 +29,7 @@ declare global {
     description: string;
     logo: string;
     tagNames: string[];
-    urls: {
-      website: string[];
-      twitter: string[];
-      messageBoard: string[];
-      chat: string[];
-      explorer: string[];
-      reddit: string[];
-      technicalDoc: string[];
-      sourceCode: string[];
-      announcement: string[];
-    };
+    urls: ProjectUrls;
     platform: {
       name: string;
       symbol: string;
@@ -48,5 +38,17 @@ declare global {
     dateLaunched: string;
     selfReportedCirculatingSupply: number;
     selfReportedMarketCap: number;
+  };
+
+  type ProjectUrls = {
+    website: string[];
+    twitter: string[];
+    messageBoard: string[];
+    chat: string[];
+    explorer: string[];
+    reddit: string[];
+    technicalDoc: string[];
+    sourceCode: string[];
+    announcement: string[];
   };
 }

@@ -59,4 +59,75 @@
       }
     }
   }
+
+  .project-details {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    color: $white;
+
+    header {
+      .back {
+        font-size: 1.5em;
+        background-color: rgba(107, 107, 107, 0.4);
+        padding: 5px 10px;
+        border-radius: 10px;
+        width: fit-content;
+        cursor: pointer;
+        margin-bottom: 30px;
+
+        &:hover {
+          background-color: rgba(107, 107, 107, 0.2);
+        }
+      }
+
+      .tags {
+        font-size: 0.7em;
+        color: $dark;
+
+        span {
+          background-color: $white;
+          border-radius: 3px;
+          padding: 3px 5px;
+          margin: 0 5px;
+        }
+      }
+
+      .title {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+
+        img {
+          object-fit: contain;
+        }
+      }
+    }
+
+    main {
+      .description {
+        background-color: $dark-grey;
+        padding: 10px;
+        border-radius: 10px;
+      }
+
+      table {
+        margin: 20px auto 20px;
+        border: 1px $grey solid;
+        border-collapse: collapse;
+
+        tr {
+          border: 1px $grey solid;
+        }
+
+        td,
+        th {
+          padding: 10px;
+        }
+      }
+
+      .links {
+      }
+    }
+  }
 }

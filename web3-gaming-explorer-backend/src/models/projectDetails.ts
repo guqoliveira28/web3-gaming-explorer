@@ -73,9 +73,9 @@ export const convertToProjectDetails = (value: {
       announcement: value.urls.announcement,
     },
     platform: {
-      name: value.platform.name,
-      symbol: value.platform.symbol,
-      tokenAddress: value.platform.tokenAddress,
+      name: value.platform?.name,
+      symbol: value.platform?.symbol,
+      tokenAddress: value.platform?.tokenAddress,
     },
     dateLaunched: value.dateLaunched,
     selfReportedCirculatingSupply: value.self_reported_circulating_supply,
