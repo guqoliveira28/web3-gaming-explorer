@@ -1,5 +1,24 @@
 @import "./variables.scss";
 
+@media only screen and (max-width: 450px) {
+  .App {
+    font-size: 14px;
+
+    .project-details main table {
+      td,
+      th {
+        padding: 5px 3px !important;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .App {
+    font-size: 10px;
+  }
+}
+
 .App {
   overflow: hidden;
 
