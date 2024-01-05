@@ -7,4 +7,13 @@ function formatPrice(price: number): string {
   }).format(price);
 }
 
-export { localStorageFavorites, formatPrice };
+function getFavoritesFromStorage(): number[] {
+  const saved = localStorage.getItem(localStorageFavorites);
+  if (!saved) {
+    return [];
+  }
+  const initialFavorites = JSON.parse(saved);
+  return initialFavorites || [];
+}
+
+export { localStorageFavorites, formatPrice, getFavoritesFromStorage };

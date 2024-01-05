@@ -1,20 +1,15 @@
 import { ReactElement, useEffect, useState } from "react";
-import { formatPrice, localStorageFavorites } from "../shared/shared";
+import {
+  formatPrice,
+  getFavoritesFromStorage,
+  localStorageFavorites,
+} from "../shared/shared";
 
 const chosenLinks = Object.freeze({
   Website: "website",
   Twitter: "twitter",
   Reddit: "reddit",
 });
-
-function getFavoritesFromStorage(): number[] {
-  const saved = localStorage.getItem(localStorageFavorites);
-  if (!saved) {
-    return [];
-  }
-  const initialFavorites = JSON.parse(saved);
-  return initialFavorites || [];
-}
 
 export default function ProjectDetails({
   project,
