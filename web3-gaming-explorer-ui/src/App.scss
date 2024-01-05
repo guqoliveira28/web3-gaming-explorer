@@ -84,12 +84,19 @@
       .tags {
         font-size: 0.7em;
         color: $dark;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: flex-start;
 
         span {
           background-color: $white;
           border-radius: 3px;
           padding: 3px 5px;
-          margin: 0 5px;
+          margin: 0 5px 10px;
+          height: fit-content;
+          width: fit-content;
+          cursor: default;
         }
       }
 
@@ -127,6 +134,19 @@
       }
 
       .links {
+        display: flex;
+        flex-direction: column;
+        a {
+          width: fit-content;
+          color: $white;
+          text-decoration: none;
+          margin: 2px 0;
+          padding: 5px 5px;
+
+          &:hover {
+            color: $grey;
+          }
+        }
       }
     }
   }
