@@ -5,6 +5,7 @@ import { ProjectsContext } from "./store/projects-context";
 import ProjectDetails from "./components/ProjectDetails";
 import { getFavoritesFromStorage } from "./shared/shared";
 import Favorites from "./components/Favorites";
+import ErrorComponent from "./components/ErrorComponent";
 
 const URL: string = "http://localhost:3001/v1";
 let error = "";
@@ -141,7 +142,7 @@ function App() {
         // loading
       }
     } else {
-      view = <p className="error">{error}</p>;
+      view = <ErrorComponent />;
     }
   }
 

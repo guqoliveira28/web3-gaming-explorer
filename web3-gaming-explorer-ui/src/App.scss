@@ -184,4 +184,24 @@
       }
     }
   }
+
+  .error {
+    margin: 20px auto 0;
+    color: $white;
+    width: 80%;
+    height: 100px;
+    background-color: rgba(132, 0, 0, 0.497);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    p {
+      font-size: 2em;
+      margin: 10px 0 10px;
+    }
+
+    span {
+      font-size: 1em;
+    }
+  }
 }
